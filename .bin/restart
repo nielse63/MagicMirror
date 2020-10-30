@@ -8,23 +8,6 @@ const logBuffer = (data, prefix = "", error = false) => {
   method(prefix, data.toString().trim());
 };
 
-// const killPort = () => {
-//   return new Promise((resolve, reject) => {
-//     console.log("killing process on port 8080");
-//     const spawn = cp.spawn("kill-port", ["8080"]);
-//     // const spawn = cp.spawn("npx", ["pm2", "kill"]);
-//     spawn.stdout.on("data", logBuffer);
-//     spawn.stderr.on("data", logBuffer.bind(null, true));
-//     spawn.on("close", (code) => {
-//       if (code) {
-//         reject(code);
-//       } else {
-//         resolve();
-//       }
-//     });
-//   });
-// };
-
 const npmInstall = () => {
   return new Promise((resolve, reject) => {
     const spawn = cp.spawn("npm", ["ci", "--production", "--loglevel=error", "--unsafe-perm"], {
@@ -67,8 +50,6 @@ const npmStart = () => {
 
 const main = async () => {
   try {
-    // await killPort();
-
     const logFile = path.resolve(__dirname, "../rsync.log");
     if (fs.existsSync(logFile)) {
       const content = fs.readFileSync(logFile, "utf8");

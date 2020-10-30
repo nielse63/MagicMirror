@@ -65,5 +65,5 @@ Host magicmirror
 Then run:
 
 ```bash
-.bin/rsync
+.bin/deploy
 ```
