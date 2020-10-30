@@ -1,5 +1,5 @@
 {
-	"verbose": true,
-	"watch": ["config/", "css/custom.css", "package-lock.json"],
-	"ext": "js,json,css"
+  "verbose": true,
+  "watch": ["config/", "js/", "index.html", "css/custom.css", "package-lock.json"],
+  "ext": "js,json,css,html"
 }

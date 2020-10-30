@@ -7,6 +7,7 @@
  * See https://github.com/MichMich/MagicMirror#configuration
  *
  */
+// var path = require("path");
 
 var config = {
   address: "localhost", // Address to listen on, can be:
@@ -14,10 +15,11 @@ var config = {
   // - another specific IPv4/6 to listen on a specific interface
   // - "0.0.0.0", "::" to listen on any interface
   // Default, when address config is left out or empty, is "localhost"
-  port: 8080,
+  port: 9999,
   basePath: "/", // The URL path where MagicMirror is hosted. If you are using a Reverse proxy
   // you must set the sub path here. basePath must end with a /
-  ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.0/28"], // Set [] to allow all IP addresses
+  // ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.0/28"], // Set [] to allow all IP addresses
+  ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"],
   // or add a specific IPv4 of 192.168.1.5 :
   // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
   // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
@@ -86,7 +88,7 @@ var config = {
       config: {
         location: "Chicago",
         locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-        appid: "3d5cc384a7b29a43f9625fdb261c2e8d",
+        appid: "63eca6d52f3b5e99c8b7d0263bb2d09d",
       },
     },
     {

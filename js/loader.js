@@ -170,12 +170,20 @@ var Loader = (function () {
    */
   var loadFile = function (fileName, callback) {
     var extension = fileName.slice((Math.max(0, fileName.lastIndexOf(".")) || Infinity) + 1);
+    var shaHashes = {
+      "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js": "sha512-QAV866KcCo2YSgj8D7BW+Zn3Fe5wVKTWwzKtWy8mkW+tePcJL7JYilvdfrBFQcdz4ODD48GpIPnhTp9UDI37uw==",
+      "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css": "sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+",
+    };
 
     switch (extension.toLowerCase()) {
       case "js":
         Log.log("Load script: " + fileName);
         var script = document.createElement("script");
         script.type = "text/javascript";
+        if (shaHashes[fileName]) {
+          script.integrity = shaHashes[fileName];
+          script.setAttribute("crossorigin", "anonymous");
+        }
         script.src = fileName;
         script.onload = function () {
           if (typeof callback === "function") {
@@ -189,7 +197,7 @@ var Loader = (function () {
           }
         };
 
-        document.getElementsByTagName("body")[0].appendChild(script);
+        document.body.appendChild(script);
         break;
       case "css":
         Log.log("Load stylesheet: " + fileName);
@@ -197,6 +205,10 @@ var Loader = (function () {
         stylesheet.rel = "stylesheet";
         stylesheet.type = "text/css";
         stylesheet.href = fileName;
+        if (shaHashes[fileName]) {
+          stylesheet.setAttribute("integrity", shaHashes[fileName]);
+          stylesheet.setAttribute("crossorigin", "anonymous");
+        }
         stylesheet.onload = function () {
           if (typeof callback === "function") {
             callback();
@@ -209,7 +221,7 @@ var Loader = (function () {
           }
         };
 
-        document.getElementsByTagName("head")[0].appendChild(stylesheet);
+        document.head.appendChild(stylesheet);
         break;
     }
   };

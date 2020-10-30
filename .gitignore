@@ -78,3 +78,6 @@ Temporary Items
 *.env
 client_secret.json
 .*cache
+*.crt
+*.csr
+*.key
