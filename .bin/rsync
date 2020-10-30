@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+source "$(pwd)/.env"
+export REMOTE_DIR="${REMOTE_DIR}"
+
+rsync -arptlzv \
+  --exclude='.git' \
+  --exclude='node_modules' \
+  --include='*.*' \
+  --delete \
+  "$(pwd)/" \
+  magicmirror:"${REMOTE_DIR}"
+
+ssh magicmirror "REMOTE_DIR=${REMOTE_DIR} ${REMOTE_DIR}/.bin/remote-restart"

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+export NODE_ENV='production'
+
+cd "${REMOTE_DIR}"
+
+kill-port 8080
+npm install --production
+npm start
