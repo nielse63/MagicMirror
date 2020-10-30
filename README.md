@@ -44,12 +44,19 @@ To donate, please follow [this](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xcl
 	<a href="https://forum.magicmirror.builders/topic/728/magicmirror-is-voted-number-1-in-the-magpi-top-50"><img src="https://magicmirror.builders/img/magpi-best-watermark-custom.png" width="150" alt="MagPi Top 50"></a>
 </p>
 
-## Running in Docker
+## Deploying
+
+Make sure you have `magicmirror` set as an ssh identity in your `~/.ssh/config` file:
+
+```
+Host magicmirror
+  HostName 192.168.x.xxx
+  User pi
+  IdentityFile ~/.ssh/id_rsa
+```
+
+Then run:
 
 ```bash
-docker build --tag magic_mirror .
-docker run --publish 8080:8080 magic_mirror
-
-# using docker compose
-docker-compose up --detach --build --remove-orphans
+.bin/rsync
 ```

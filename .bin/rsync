@@ -2,13 +2,15 @@
 set -e
 
 source "$(pwd)/.env"
+RSYNC_LOG_FILE="$(pwd)/rsync.log"
+CONFIG_DIR="$(pwd)/.bin/config"
 export REMOTE_DIR="${REMOTE_DIR}"
 
 rsync -arptlzv \
-  --exclude='.git' \
-  --exclude='node_modules' \
-  --include='*.*' \
+  --exclude-from="${CONFIG_DIR}/exclude.txt" \
+  --include-from="${CONFIG_DIR}/include.txt" \
   --delete \
+  --log-file="${RSYNC_LOG_FILE}" \
   "$(pwd)/" \
   magicmirror:"${REMOTE_DIR}"
 

@@ -9,7 +9,7 @@
  */
 
 var config = {
-  address: "localhost", // Address to listen on, can be:
+  address: "0.0.0.0", // Address to listen on, can be:
   // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
   // - another specific IPv4/6 to listen on a specific interface
   // - "0.0.0.0", "::" to listen on any interface
@@ -29,8 +29,8 @@ var config = {
 
   language: "en",
   logLevel: ["INFO", "LOG", "WARN", "ERROR"],
-  timeFormat: 24,
-  units: "metric",
+  timeFormat: 12,
+  units: "imperial",
   // serverOnly:  true/false/"local" ,
   // local for armv6l processors, default
   //   starts serveronly and then starts chrome browser
@@ -38,13 +38,13 @@ var config = {
   // true, force serveronly mode, because you want to.. no UI on this device
 
   modules: [
-    {
-      module: "alert",
-    },
-    {
-      module: "updatenotification",
-      position: "top_bar",
-    },
+    // {
+    // 	module: "alert",
+    // },
+    // {
+    // 	module: "updatenotification",
+    // 	position: "top_bar"
+    // },
     {
       module: "clock",
       position: "top_left",
@@ -54,6 +54,7 @@ var config = {
       header: "US Holidays",
       position: "top_left",
       config: {
+        maximumEntries: 5,
         calendars: [
           {
             symbol: "calendar-check",
@@ -65,40 +66,67 @@ var config = {
     {
       module: "compliments",
       position: "lower_third",
+      disabled: true,
     },
     {
       module: "currentweather",
       position: "top_right",
       config: {
-        location: "New York",
-        locationID: "", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-        appid: "YOUR_OPENWEATHER_API_KEY",
+        location: "Chicago",
+        locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+        appid: "OPENWEATHER_API_KEY",
       },
+      // disabled: isWeatherDisabled,
     },
     {
       module: "weatherforecast",
       position: "top_right",
       header: "Weather Forecast",
       config: {
-        location: "New York",
-        locationID: "5128581", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-        appid: "YOUR_OPENWEATHER_API_KEY",
+        location: "Chicago",
+        locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
+        appid: "OPENWEATHER_API_KEY",
       },
+      // disabled: isWeatherDisabled,
     },
     {
       module: "newsfeed",
-      position: "bottom_bar",
+      position: "bottom_left",
       config: {
         feeds: [
           {
             title: "New York Times",
             url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
           },
+          {
+            title: "CNN",
+            url: "http://rss.cnn.com/rss/cnn_topstories.rss",
+          },
         ],
         showSourceTitle: true,
         showPublishDate: true,
         broadcastNewsFeeds: true,
         broadcastNewsUpdates: true,
+      },
+    },
+    {
+      module: "MMM-AirQuality",
+      position: "top_right", // you may choose any location
+      header: "AQI",
+      config: {
+        location: "usa/illinois/chi_sp/",
+        showLocation: false,
+      },
+    },
+    {
+      module: "MMM-uv-index",
+      position: "top_right", // you may choose any location
+      header: "UX Index",
+      config: {
+        lon: -87.650047,
+        lat: 41.850029,
+        appid: "OPENWEATHER_API_KEY", // openweathermap.org api key
+        colors: false,
       },
     },
   ],
