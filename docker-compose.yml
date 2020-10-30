@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  magic_mirror:
+    build:
+      context: ./
+    container_name: magic_mirror
+    image: node:10-buster
+    # restart: unless-stopped
+    # volumes:
+    #   - /etc/localtime:/etc/localtime:ro
+    #   - ~/magic_mirror/config:/opt/magic_mirror/config
+    #   - ~/magic_mirror/modules:/opt/magic_mirror/modules
+    ports:
+      - 8080:8080

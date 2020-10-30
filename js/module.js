@@ -229,6 +229,7 @@ var Module = Class.extend({
 	 *
 	 * @param {object} config The combined module config.
 	 * @param {boolean} config Merge module config in deep.
+	 * @param deep
 	 */
 	setConfig: function (config, deep) {
 		this.config = deep ? configMerge({}, this.defaults, config) : Object.assign({}, this.defaults, config);
@@ -456,10 +457,14 @@ var Module = Class.extend({
  * it don't merge all thing in deep
  * -> object in object and array is not merging
  * -------
+ *
  * @bugsounet
  * @Todo: idea of Mich determinate what do you want to merge or not
  */
 
+/**
+ * @param result
+ */
 function configMerge(result) {
 	var stack = Array.prototype.slice.call(arguments, 1);
 	var item;
