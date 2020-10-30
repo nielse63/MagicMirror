@@ -54,6 +54,7 @@
     "http-auth": "^3.2.3",
     "husky": "^4.3.0",
     "jsdom": "^11.6.2",
+    "lint-staged": "^10.5.0",
     "lodash": "^4.17.20",
     "mocha": "^7.1.2",
     "mocha-each": "^2.0.1",
@@ -96,7 +97,16 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": ".bin/backup-config && pretty-quick --staged"
+      "pre-commit": ".bin/pre-commit"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml,html}": [
+      "prettier --write"
+    ]
   }
 }
