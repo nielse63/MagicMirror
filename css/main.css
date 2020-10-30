@@ -1,12 +1,12 @@
 html {
-  cursor: none;
-  overflow: hidden;
+  /* cursor: none; */
+  /* overflow: hidden; */
   background: #000;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 body {
   margin: 60px;

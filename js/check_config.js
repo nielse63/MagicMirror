@@ -22,53 +22,53 @@ const Utils = require(rootPath + "/js/utils.js");
  * @returns {string} path and filename of the config file
  */
 function getConfigFile() {
-	// FIXME: This function should be in core. Do you want refactor me ;) ?, be good!
-	let configFileName = path.resolve(rootPath + "/config/config.js");
-	if (process.env.MM_CONFIG_FILE) {
-		configFileName = path.resolve(process.env.MM_CONFIG_FILE);
-	}
-	return configFileName;
+  // FIXME: This function should be in core. Do you want refactor me ;) ?, be good!
+  let configFileName = path.resolve(rootPath + "/config/config.js");
+  if (process.env.MM_CONFIG_FILE) {
+    configFileName = path.resolve(process.env.MM_CONFIG_FILE);
+  }
+  return configFileName;
 }
 
 /**
  * Checks the config file using eslint.
  */
 function checkConfigFile() {
-	const configFileName = getConfigFile();
+  const configFileName = getConfigFile();
 
-	// Check if file is present
-	if (fs.existsSync(configFileName) === false) {
-		Log.error(Utils.colors.error("File not found: "), configFileName);
-		throw new Error("No config file present!");
-	}
+  // Check if file is present
+  if (fs.existsSync(configFileName) === false) {
+    Log.error(Utils.colors.error("File not found: "), configFileName);
+    throw new Error("No config file present!");
+  }
 
-	// Check permission
-	try {
-		fs.accessSync(configFileName, fs.F_OK);
-	} catch (e) {
-		Log.log(Utils.colors.error(e));
-		throw new Error("No permission to access config file!");
-	}
+  // Check permission
+  try {
+    fs.accessSync(configFileName, fs.F_OK);
+  } catch (e) {
+    Log.log(Utils.colors.error(e));
+    throw new Error("No permission to access config file!");
+  }
 
-	// Validate syntax of the configuration file.
-	Log.info(Utils.colors.info("Checking file... "), configFileName);
+  // Validate syntax of the configuration file.
+  Log.info(Utils.colors.info("Checking file... "), configFileName);
 
-	// I'm not sure if all ever is utf-8
-	fs.readFile(configFileName, "utf-8", function (err, data) {
-		if (err) {
-			throw err;
-		}
-		const messages = linter.verify(data);
-		if (messages.length === 0) {
-			Log.info(Utils.colors.pass("Your configuration file doesn't contain syntax errors :)"));
-		} else {
-			Log.error(Utils.colors.error("Your configuration file contains syntax errors :("));
-			// In case the there errors show messages and return
-			messages.forEach((error) => {
-				Log.error("Line", error.line, "col", error.column, error.message);
-			});
-		}
-	});
+  // I'm not sure if all ever is utf-8
+  fs.readFile(configFileName, "utf-8", function (err, data) {
+    if (err) {
+      throw err;
+    }
+    const messages = linter.verify(data);
+    if (messages.length === 0) {
+      Log.info(Utils.colors.pass("Your configuration file doesn't contain syntax errors :)"));
+    } else {
+      Log.error(Utils.colors.error("Your configuration file contains syntax errors :("));
+      // In case the there errors show messages and return
+      messages.forEach((error) => {
+        Log.error("Line", error.line, "col", error.column, error.message);
+      });
+    }
+  });
 }
 
 checkConfigFile();

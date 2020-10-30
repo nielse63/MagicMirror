@@ -5,20 +5,20 @@
  */
 
 var config = {
-	port: 8080,
-	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.10.1"],
+  port: 8080,
+  ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.10.1"],
 
-	language: "en",
-	timeFormat: 24,
-	units: "metric",
-	electronOptions: {
-		webPreferences: {
-			nodeIntegration: true
-		}
-	}
+  language: "en",
+  timeFormat: 24,
+  units: "metric",
+  electronOptions: {
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  },
 };
 
 /*************** DO NOT EDIT THE LINE BELOW ***************/
 if (typeof module !== "undefined") {
-	module.exports = config;
+  module.exports = config;
 }
