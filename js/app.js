@@ -70,6 +70,10 @@ var App = function () {
 			var c = require(configFilename);
 			checkDeprecatedOptions(c);
 			var config = Object.assign(defaults, c);
+			if (process.env.NODE_NV === 'production') {
+				config.address = "0.0.0.0";
+				// config.ipWhitelist = [];
+			}
 			callback(config);
 		} catch (e) {
 			if (e.code === "ENOENT") {

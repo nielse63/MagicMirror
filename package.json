@@ -72,7 +72,6 @@
 	"dependencies": {
 		"colors": "^1.4.0",
 		"console-stamp": "^0.2.9",
-		"dotenv": "^8.2.0",
 		"eslint": "^7.9.0",
 		"express": "^4.17.1",
 		"express-ipfilter": "^1.1.2",

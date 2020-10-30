@@ -18,9 +18,6 @@ jspm_modules
 .node_repl_history
 .nyc_output/
 
-# Visual Studio Code ignoramuses.
-.vscode/
-
 # IDE Code ignoramuses.
 .idea/
 
@@ -65,7 +62,7 @@ Temporary Items
 !/modules/README.md**
 
 # Ignore changes to the custom css files.
-/css/custom.css
+# /css/custom.css
 
 # Vim
 ## swap
