@@ -6,7 +6,7 @@ RSYNC_LOG_FILE="$(pwd)/rsync.log"
 CONFIG_DIR="$(pwd)/.bin/config"
 export REMOTE_DIR="${REMOTE_DIR}"
 
-# .bin/backup-config
+.bin/backup-config
 # npx pm2 kill
 rm rsync.log
 # npm run lint:js
@@ -19,5 +19,9 @@ rsync -arptlzv \
   --log-file="${RSYNC_LOG_FILE}" \
   "$(pwd)/" \
   magicmirror:"${REMOTE_DIR}"
+
+rsync -aptlzv \
+  "${RSYNC_LOG_FILE}" \
+  magicmirror:"${REMOTE_DIR}/"
 
 ssh magicmirror "${REMOTE_DIR}/.bin/restart"

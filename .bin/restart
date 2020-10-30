@@ -27,11 +27,11 @@ const logBuffer = (data, prefix = "", error = false) => {
 
 const npmInstall = () => {
   return new Promise((resolve, reject) => {
-    const spawn = cp.spawn("npm", ["install", "--production", "--loglevel=error", "--unsafe-perm"], {
+    const spawn = cp.spawn("npm", ["ci", "--production", "--loglevel=error", "--unsafe-perm"], {
       cwd: path.resolve(__dirname, ".."),
-      env: {
+      env: Object.assign(process.env, {
         NODE_ENV: "production",
-      },
+      }),
     });
     let error = "";
     spawn.stdout.on("data", (data) => {
@@ -52,14 +52,13 @@ const npmInstall = () => {
 };
 
 const npmStart = () => {
-  return new Promise((resolve, reject) => {
-    const response = cp
-      .execSync("pm2 startOrReload ecosystem.config.js --env production", {
-        cwd: path.resolve(__dirname, ".."),
-        env: Object.assign(process.env, {
-          DISPLAY: ":0",
-        }),
-      })
+  return new Promise((resolve) => {
+    cp.execSync("npm run start:prod", {
+      cwd: path.resolve(__dirname, ".."),
+      env: Object.assign(process.env, {
+        DISPLAY: ":0",
+      }),
+    })
       .toString()
       .trim();
     resolve();
@@ -67,23 +66,28 @@ const npmStart = () => {
 };
 
 const main = async () => {
-  // await killPort();
+  try {
+    // await killPort();
 
-  // const logFile = path.resolve(__dirname, "../rsync.log");
-  // if (fs.existsSync(logFile)) {
-  //   const content = fs.readFileSync(logFile, "utf8");
-  //   if (content.includes("<f+++++++ package-lock.json")) {
-  //     console.log("package-lock.json did change, reinstalling modules");
-  //     await npmInstall();
-  //   }
-  // }
-  await npmStart();
+    const logFile = path.resolve(__dirname, "../rsync.log");
+    if (fs.existsSync(logFile)) {
+      const content = fs.readFileSync(logFile, "utf8");
+      if (content.includes("package-lock.json")) {
+        console.log("package-lock.json did change, reinstalling modules");
+        await npmInstall();
+      }
+    }
+    await npmStart();
+  } catch (error) {
+    console.error("error", error);
+    process.exit(1);
+  }
 };
 
 main()
   .then(() => {
     console.log("restart complete");
-    process.exit();
+    // process.exit();
   })
   .catch((error) => {
     console.error("error", error);

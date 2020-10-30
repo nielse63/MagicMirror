@@ -1,9 +1,19 @@
+const path = require("path");
+
 module.exports = {
   apps: [
     {
-      name: "prod",
+      name: "magic-mirror",
+      cwd: __dirname,
       script: "npm start",
-      log_file: "logs/pm2-combined.log",
+      log_file: path.resolve(__dirname, "logs/pm2-combined.log"),
+      env: {
+        NODE_ENV: "development",
+      },
+      env_production: {
+        DISPLAY: ":0",
+        NODE_ENV: "production",
+      },
     },
   ],
 
@@ -15,7 +25,7 @@ module.exports = {
   //       repo: "GIT_REPOSITORY",
   //       path: "DESTINATION_PATH",
   //       "pre-deploy-local": "",
-  //       "post-deploy": "npm install && pm2 reload ecosystem.config.js --only prod --env production",
+  //       "post-deploy": "npm install && pm2 reload ecosystem.config.js --env production",
   //       "pre-setup": "",
   //     },
   //   },
