@@ -4,5 +4,7 @@ node_modules
 .vscode
 tests
 *.code-workspace
-*.log
+logs/*.log
 .DS_Store
+*.md
+.*cache

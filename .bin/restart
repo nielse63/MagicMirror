@@ -1,0 +1,91 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const path = require("path");
+const cp = require("child_process");
+
+const logBuffer = (data, prefix = "", error = false) => {
+  const method = error ? console.error : console.log;
+  method(prefix, data.toString().trim());
+};
+
+// const killPort = () => {
+//   return new Promise((resolve, reject) => {
+//     console.log("killing process on port 8080");
+//     const spawn = cp.spawn("kill-port", ["8080"]);
+//     // const spawn = cp.spawn("npx", ["pm2", "kill"]);
+//     spawn.stdout.on("data", logBuffer);
+//     spawn.stderr.on("data", logBuffer.bind(null, true));
+//     spawn.on("close", (code) => {
+//       if (code) {
+//         reject(code);
+//       } else {
+//         resolve();
+//       }
+//     });
+//   });
+// };
+
+const npmInstall = () => {
+  return new Promise((resolve, reject) => {
+    const spawn = cp.spawn("npm", ["install", "--production", "--loglevel=error", "--unsafe-perm"], {
+      cwd: path.resolve(__dirname, ".."),
+      env: {
+        NODE_ENV: "production",
+      },
+    });
+    let error = "";
+    spawn.stdout.on("data", (data) => {
+      logBuffer(data, "npm ci [stdout]");
+    });
+    spawn.stderr.on("data", (data) => {
+      error = `${error}\n${data}`;
+      logBuffer(data, "npm ci [stderr]", true);
+    });
+    spawn.on("close", (code) => {
+      if (code) {
+        reject(new Error(error));
+      } else {
+        resolve();
+      }
+    });
+  });
+};
+
+const npmStart = () => {
+  return new Promise((resolve, reject) => {
+    const response = cp
+      .execSync("pm2 startOrReload ecosystem.config.js --env production", {
+        cwd: path.resolve(__dirname, ".."),
+        env: Object.assign(process.env, {
+          DISPLAY: ":0",
+        }),
+      })
+      .toString()
+      .trim();
+    resolve();
+  });
+};
+
+const main = async () => {
+  // await killPort();
+
+  // const logFile = path.resolve(__dirname, "../rsync.log");
+  // if (fs.existsSync(logFile)) {
+  //   const content = fs.readFileSync(logFile, "utf8");
+  //   if (content.includes("<f+++++++ package-lock.json")) {
+  //     console.log("package-lock.json did change, reinstalling modules");
+  //     await npmInstall();
+  //   }
+  // }
+  await npmStart();
+};
+
+main()
+  .then(() => {
+    console.log("restart complete");
+    process.exit();
+  })
+  .catch((error) => {
+    console.error("error", error);
+    process.exit(1);
+  });

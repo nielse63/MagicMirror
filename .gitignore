@@ -1,5 +1,5 @@
 # Various Node ignoramuses.
-logs
+# logs
 *.log
 npm-debug.log*
 pids
@@ -77,3 +77,4 @@ Temporary Items
 # custom
 *.env
 client_secret.json
+.*cache

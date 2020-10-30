@@ -1,5 +1,8 @@
 {
-	"files.associations": {
-		"*.template": "javascript"
-	}
+  "files.associations": {
+    "*.js.sample": "javascript"
+  },
+  "files.exclude": {
+    "*.log": false
+  }
 }

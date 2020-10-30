@@ -6,6 +6,12 @@ RSYNC_LOG_FILE="$(pwd)/rsync.log"
 CONFIG_DIR="$(pwd)/.bin/config"
 export REMOTE_DIR="${REMOTE_DIR}"
 
+# .bin/backup-config
+# npx pm2 kill
+rm rsync.log
+# npm run lint:js
+# npm run lint:css
+
 rsync -arptlzv \
   --exclude-from="${CONFIG_DIR}/exclude.txt" \
   --include-from="${CONFIG_DIR}/include.txt" \
@@ -14,4 +20,4 @@ rsync -arptlzv \
   "$(pwd)/" \
   magicmirror:"${REMOTE_DIR}"
 
-ssh magicmirror "REMOTE_DIR=${REMOTE_DIR} ${REMOTE_DIR}/.bin/remote-restart"
+ssh magicmirror "${REMOTE_DIR}/.bin/restart"

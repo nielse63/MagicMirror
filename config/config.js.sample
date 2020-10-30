@@ -9,7 +9,8 @@
  */
 
 var config = {
-  address: "0.0.0.0", // Address to listen on, can be:
+  address: "0.0.0.0",
+  //   address: "0.0.0.0", // Address to listen on, can be:
   // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
   // - another specific IPv4/6 to listen on a specific interface
   // - "0.0.0.0", "::" to listen on any interface
@@ -17,7 +18,7 @@ var config = {
   port: 8080,
   basePath: "/", // The URL path where MagicMirror is hosted. If you are using a Reverse proxy
   // you must set the sub path here. basePath must end with a /
-  ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], // Set [] to allow all IP addresses
+  ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.0/28"], // Set [] to allow all IP addresses
   // or add a specific IPv4 of 192.168.1.5 :
   // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
   // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
@@ -39,11 +40,13 @@ var config = {
 
   modules: [
     // {
-    // 	module: "alert",
+    //   module: "alert",
+    //   disabled: true,
     // },
     // {
-    // 	module: "updatenotification",
-    // 	position: "top_bar"
+    //   module: "updatenotification",
+    //   position: "top_bar",
+    //   disabled: true,
     // },
     {
       module: "clock",
@@ -54,7 +57,7 @@ var config = {
       header: "US Holidays",
       position: "top_left",
       config: {
-        maximumEntries: 5,
+        maximumEntries: 3,
         calendars: [
           {
             symbol: "calendar-check",
@@ -63,11 +66,11 @@ var config = {
         ],
       },
     },
-    {
-      module: "compliments",
-      position: "lower_third",
-      disabled: true,
-    },
+    // {
+    //   module: "compliments",
+    //   position: "lower_third",
+    //   disabled: true,
+    // },
     {
       module: "currentweather",
       position: "top_right",
@@ -76,7 +79,6 @@ var config = {
         locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
         appid: "OPENWEATHER_API_KEY",
       },
-      // disabled: isWeatherDisabled,
     },
     {
       module: "weatherforecast",
@@ -87,7 +89,6 @@ var config = {
         locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
         appid: "OPENWEATHER_API_KEY",
       },
-      // disabled: isWeatherDisabled,
     },
     {
       module: "newsfeed",
@@ -111,8 +112,8 @@ var config = {
     },
     {
       module: "MMM-AirQuality",
-      position: "top_right", // you may choose any location
-      header: "AQI",
+      position: "bottom_right", // you may choose any location
+      header: "Air Quality Index",
       config: {
         location: "usa/illinois/chi_sp/",
         showLocation: false,
@@ -120,8 +121,8 @@ var config = {
     },
     {
       module: "MMM-uv-index",
-      position: "top_right", // you may choose any location
-      header: "UX Index",
+      position: "bottom_right", // you may choose any location
+      header: "UV Index",
       config: {
         lon: -87.650047,
         lat: 41.850029,

@@ -44,6 +44,13 @@ To donate, please follow [this](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xcl
 	<a href="https://forum.magicmirror.builders/topic/728/magicmirror-is-voted-number-1-in-the-magpi-top-50"><img src="https://magicmirror.builders/img/magpi-best-watermark-custom.png" width="150" alt="MagPi Top 50"></a>
 </p>
 
+## Modules
+
+```bash
+git clone https://github.com/Sketusky/MMM-uv-index modules/MMM-uv-index
+git clone https://github.com/CFenner/MMM-AirQuality modules/MMM-AirQuality
+```
+
 ## Deploying
 
 Make sure you have `magicmirror` set as an ssh identity in your `~/.ssh/config` file:
