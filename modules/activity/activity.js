@@ -2,10 +2,7 @@ Module.register("activity", {
   // Default module config.
   defaults: {
     fitbarkToken: "",
-    dogIds: [
-      "ebbadcb3-1815-4520-b548-a7e9633df01e",
-      "70c43601-eab0-4576-b4e9-8f6839f96ff7",
-    ],
+    dogIds: ["ebbadcb3-1815-4520-b548-a7e9633df01e", "70c43601-eab0-4576-b4e9-8f6839f96ff7"],
   },
 
   start: function () {
@@ -39,13 +36,11 @@ Module.register("activity", {
 
   createGaugeObject: function (data) {
     const circumference = 2 * Math.PI * 45;
-    const dasharray = `${Math.floor(circumference * 0.8)}, ${Math.floor(
+    const dasharray = `${Math.floor(circumference * 0.8)}, ${Math.floor(circumference)}`;
+    const percentage = data.activity / data.goal;
+    const valueDasharray = `${Math.floor(circumference * 0.8 * percentage)}, ${Math.floor(
       circumference
     )}`;
-    const percentage = data.activity / data.goal;
-    const valueDasharray = `${Math.floor(
-      circumference * 0.8 * percentage
-    )}, ${Math.floor(circumference)}`;
     const getColor = (value) => {
       if (value < 33) {
         return "#ef4655"; // red
