@@ -61,6 +61,9 @@ Module.register("activity", {
   updateActivity: function (payload) {
     this.activity = Object.values(payload).map(this.createGaugeObject);
     this.updateDom();
+    setTimeout(() => {
+      this.initRequests();
+    }, 300 * 1000);
   },
 
   initRequests: function () {
