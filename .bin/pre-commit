@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-cp config/config.js config/config.js.sample
+.bin/backup-config
 git add config/config.js.sample
 
-npx lint-staged -p 5
+npx lint-staged

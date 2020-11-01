@@ -40,45 +40,28 @@ var config = {
   // true, force serveronly mode, because you want to.. no UI on this device
 
   modules: [
-    // {
-    //   module: "alert",
-    //   disabled: true,
-    // },
-    // {
-    //   module: "updatenotification",
-    //   position: "top_bar",
-    //   disabled: true,
-    // },
+    // left column
     {
       module: "clock",
       position: "top_left",
     },
     {
-      module: "calendar",
-      header: "US Holidays",
-      position: "top_left",
+      module: "activity",
+      position: "bottom_left",
+      header: "Activity",
       config: {
-        maximumEntries: 3,
-        calendars: [
-          {
-            symbol: "calendar-check",
-            url: "webcal://www.calendarlabs.com/ical-calendar/ics/76/US_Holidays.ics",
-          },
-        ],
+        fitbarkToken: "FITBARK_AUTH_TOKEN",
       },
     },
-    // {
-    //   module: "compliments",
-    //   position: "lower_third",
-    //   disabled: true,
-    // },
+
+    // right column
     {
       module: "currentweather",
       position: "top_right",
       config: {
         location: "Chicago",
         locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-        appid: "3d5cc384a7b29a43f9625fdb261c2e8d",
+        appid: "OPENWEATHER_API_KEY",
       },
     },
     {
@@ -88,27 +71,8 @@ var config = {
       config: {
         location: "Chicago",
         locationID: "4887398", //ID from http://bulk.openweathermap.org/sample/city.list.json.gz; unzip the gz file and find your city
-        appid: "63eca6d52f3b5e99c8b7d0263bb2d09d",
-      },
-    },
-    {
-      module: "newsfeed",
-      position: "bottom_left",
-      config: {
-        feeds: [
-          {
-            title: "New York Times",
-            url: "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-          },
-          {
-            title: "CNN",
-            url: "http://rss.cnn.com/rss/cnn_topstories.rss",
-          },
-        ],
-        showSourceTitle: true,
-        showPublishDate: true,
-        broadcastNewsFeeds: true,
-        broadcastNewsUpdates: true,
+        appid: "OPENWEATHER_API_KEY",
+        appendLocationNameToHeader: false,
       },
     },
     {
@@ -127,7 +91,7 @@ var config = {
       config: {
         lon: -87.650047,
         lat: 41.850029,
-        appid: "3d5cc384a7b29a43f9625fdb261c2e8d", // openweathermap.org api key
+        appid: "OPENWEATHER_API_KEY", // openweathermap.org api key
         colors: false,
       },
     },

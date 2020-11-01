@@ -60,6 +60,8 @@ Temporary Items
 !/modules/default
 !/modules/default/**
 !/modules/README.md**
+!/modules/activity
+!/modules/activity/**
 
 # Ignore changes to the custom css files.
 # /css/custom.css

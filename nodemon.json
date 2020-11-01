@@ -1,5 +1,12 @@
 {
   "verbose": true,
-  "watch": ["config/", "js/", "index.html", "css/custom.css", "package-lock.json"],
-  "ext": "js,json,css,html"
+  "watch": [
+    "config/",
+    "js/",
+    "modules/",
+    "index.html",
+    "css/custom.css",
+    "package-lock.json"
+  ],
+  "ext": "js,json,css,html,njk"
 }

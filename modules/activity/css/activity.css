@@ -1,0 +1,39 @@
+.activity-content {
+  display: flex;
+}
+
+.left .activity-content,
+.right .activity-content {
+  display: block;
+}
+
+.gauge-container {
+  width: 154px;
+  height: 129px;
+  padding: 10px;
+  position: relative;
+}
+
+.gauge {
+  transform: rotate(135deg);
+}
+
+.gauge .circle {
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.gauge-title,
+.gauge-subtitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.gauge-title {
+  transform: translate(-50%, -85%);
+}
+
+.gauge-subtitle {
+  transform: translate(-50%, 15%);
+}

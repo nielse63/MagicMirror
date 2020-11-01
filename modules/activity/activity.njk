@@ -1,0 +1,12 @@
+<div class="activity-content">
+  {% if activity %} {% for a in activity %}
+  <div id="cpuSpeed" class="gauge-container">
+    <svg viewBox="0 0 100 100" class="gauge">
+      <circle class="circle dial" r="45" cx="50%" cy="50%" stroke="#eee" stroke-width="2" stroke-dasharray="210, 282" fill="none"></circle>
+      <circle class="circle value" r="45" cx="50%" cy="50%" stroke="{{ a.color }}" stroke-width="2" stroke-dasharray="{{ a.valueDasharray }}" fill="none"></circle>
+    </svg>
+    <div class="gauge-title normal small">{{ a.name }}</div>
+    <div class="gauge-subtitle bright medium light">{{ a.activityString }}</div>
+  </div>
+  {% endfor %} {% endif %}
+</div>

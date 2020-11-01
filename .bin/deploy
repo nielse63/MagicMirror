@@ -6,11 +6,8 @@ RSYNC_LOG_FILE="$(pwd)/rsync.log"
 CONFIG_DIR="$(pwd)/.bin/config"
 export REMOTE_DIR="${REMOTE_DIR}"
 
-# .bin/backup-config
-# npx pm2 kill
-rm rsync.log
-# npm run lint:js
-# npm run lint:css
+.bin/backup-config
+rm -f "${RSYNC_LOG_FILE}"
 
 rsync -arptlzv \
   --exclude-from="${CONFIG_DIR}/exclude.txt" \
