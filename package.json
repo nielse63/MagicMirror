@@ -4,7 +4,7 @@
   "description": "The open source modular smart mirror platform.",
   "main": "js/electron.js",
   "scripts": {
-    "start": "DISPLAY=\"${DISPLAY:=:0}\" ./node_modules/.bin/electron js/electron.js",
+    "start": "DISPLAY=\"${DISPLAY:=:0}\" electron js/electron.js",
     "server": "node ./serveronly",
     "install": "echo \"Installing vendor files ...\n\" && cd vendor && npm install --loglevel=error",
     "install-fonts": "echo \"Installing fonts ...\n\" && cd fonts && npm install --loglevel=error",
@@ -69,13 +69,11 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-prettier": "^1.1.2"
   },
-  "optionalDependencies": {
-    "electron": "^6.1.7"
-  },
   "dependencies": {
     "axios": "^0.21.0",
     "colors": "^1.4.0",
     "console-stamp": "^0.2.9",
+    "electron": "^6.1.12",
     "express": "^4.17.1",
     "express-ipfilter": "^1.1.2",
     "feedme": "^1.2.0",

@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  magicmirror:
+    image: magicmirror
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8080:8080
+      - 9229:9229
+    command: ["npm", "run", "dev"]

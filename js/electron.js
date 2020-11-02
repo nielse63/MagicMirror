@@ -33,14 +33,8 @@ function createWindow() {
     backgroundColor: "#000000",
   };
 
-  // DEPRECATED: "kioskmode" backwards compatibility, to be removed
-  // settings these options directly instead provides cleaner interface
-  if (config.kioskmode) {
-    electronOptionsDefaults.kiosk = true;
-  } else {
-    electronOptionsDefaults.fullscreen = true;
-    electronOptionsDefaults.autoHideMenuBar = true;
-  }
+  electronOptionsDefaults.fullscreen = true;
+  electronOptionsDefaults.autoHideMenuBar = true;
 
   var electronOptions = Object.assign({}, electronOptionsDefaults, config.electronOptions);
 
@@ -51,13 +45,16 @@ function createWindow() {
   // If config.address is not defined or is an empty string (listening on all interfaces), connect to localhost
 
   var prefix;
-  if (config["tls"] !== null && config["tls"]) {
+  if ("tls" in config) {
     prefix = "https://";
   } else {
     prefix = "http://";
   }
 
-  var address = (config.address === void 0) | (config.address === "") ? (config.address = "localhost") : config.address;
+  var address =
+    (config.address === void 0) | (config.address === "")
+      ? (config.address = "localhost")
+      : config.address;
   mainWindow.loadURL(`${prefix}${address}:${config.port}`);
 
   // Open the DevTools if run with "npm start dev"

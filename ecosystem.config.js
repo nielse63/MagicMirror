@@ -14,6 +14,7 @@ module.exports = {
         DISPLAY: ":0",
         NODE_ENV: "production",
       },
+      instances: "max",
     },
   ],
 
